@@ -1,0 +1,96 @@
+package edu.kit.archicorc2.ui.dialogs;
+
+import java.util.List;
+
+import org.eclipse.jface.dialogs.IMessageProvider;
+import org.eclipse.jface.dialogs.TitleAreaDialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+
+import edu.kit.archicorc2.Verification.DirectionType;
+import edu.kit.archicorc2.Verification.PortType;
+import edu.kit.archicorc2.Verification.Ports;
+import edu.kit.archicorc2.Verification.ProviderType;
+import edu.kit.archicorc2.edl.events.EventType;
+import edu.kit.archicorc2.idl.cidl.Interface;
+import edu.kit.archicorc2.ui.localization.StringTable;
+import edu.kit.archicorc2.ui.provider.ListServiceLabelProvider;
+
+public class EditConsumerPortFeatureDialog extends EditPortFeatureDialog {
+
+	private Label labelLabel;
+	private Text portLabel;
+	private Label labelFunction;
+	private Text portFunction;
+	private String currentLabel;
+	private String currentFunction;
+
+	public EditConsumerPortFeatureDialog(Shell parentShell, List<String> types, List<Interface> interfaces, List<EventType> events) {
+		super(parentShell, types, interfaces, events);
+	}
+
+	private void createFunction(Composite container) {
+		labelFunction = new Label(container, SWT.NONE);
+		labelFunction.setText(StringTable.EDIT_PORT_DIALOG_FUNCTION);
+
+		GridData dataName = new GridData();
+		dataName.grabExcessHorizontalSpace = true;
+		dataName.horizontalAlignment = GridData.FILL;
+		dataName.horizontalSpan = 2;
+
+		portFunction = new Text(container, SWT.BORDER);
+		portFunction.setLayoutData(dataName);
+		portFunction.setText(currentFunction != null ? currentFunction : "");
+	}
+
+	private void createLabel(Composite container) {
+		labelLabel = new Label(container, SWT.NONE);
+		labelLabel.setText(StringTable.EDIT_PORT_DIALOG_LABEL);
+
+		GridData dataName = new GridData();
+		dataName.grabExcessHorizontalSpace = true;
+		dataName.horizontalAlignment = GridData.FILL;
+		dataName.horizontalSpan = 2;
+
+		portLabel = new Text(container, SWT.BORDER);
+		portLabel.setLayoutData(dataName);
+		portLabel.setText(currentLabel != null ? currentLabel : "");
+	}
+	
+	@Override
+	protected void createAdditionalControls(Composite container) {
+		// TODO Auto-generated method stub
+		super.createAdditionalControls(container);
+		createFunction(container);
+		createLabel(container);
+	}
+
+	@Override
+	public void setOldProperties(Object object) {
+		super.setOldProperties(object);
+		Ports port = (Ports) object;
+		currentLabel = port.getLabel();
+		currentFunction = port.getFunction();
+	}
+
+	@Override
+	public void setNewProperties() {
+		super.setNewProperties();
+		Ports port = (Ports) object;
+		port.setLabel(portLabel.getText());
+		port.setFunction(portFunction.getText());
+	}
+}

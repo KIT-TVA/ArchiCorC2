@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: edu.kit.archicorc2.edl.ui.tests
+Bundle-ManifestVersion: 2
+Bundle-Name: edu.kit.archicorc2.edl.ui.tests
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: edu.kit.archicorc2.edl.ui.tests; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: edu.kit.archicorc2.edl.ui,
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.xbase.testing,
+ org.eclipse.xtext.xbase.junit,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext.ui.testing,
+ org.eclipse.ui.workbench;resolution:=optional
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: edu.kit.archicorc2.edl.ui.tests;x-internal=true

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/edu.kit.archicorc2.mm/src-gen" creationIcons="false"
+    editDirectory="/edu.kit.archicorc2.mm.edit/src-gen" editorDirectory="/edu.kit.archicorc2.mm.editor/src-gen"
+    modelPluginID="edu.kit.archicorc2.mm" modelName="Mm" editPluginClass="edu.kit.archicorc2.Verification.provider.MmEditPlugin"
+    editorPluginClass="edu.kit.archicorc2.Verification.presentation.MmEditorPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" codeFormatting="true"
+    testSuiteClass="edu.kit.archicorc2.Verification.tests.MmAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="8.0" copyrightFields="false" editPluginID="edu.kit.archicorc2.mm.edit"
+    editorPluginID="edu.kit.archicorc2.mm.editor" operationReflection="true"
+    importOrganizing="true">
+  <foreignModel>mm.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="Mm" basePackage="edu.kit.archicorc2" disposableProviderFactory="true"
+      ecorePackage="mm.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="mm.ecore#//PortType">
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//PortType/SERVICE"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//PortType/DATA"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//PortType/EVENT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="mm.ecore#//ViewPoint">
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//ViewPoint/FUNCTIONAL"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//ViewPoint/TIMING"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//ViewPoint/MEMORY"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="mm.ecore#//PropertyType">
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//PropertyType/EQUATION"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//PropertyType/MINDELAY"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//PropertyType/MAXDELAY"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//PropertyType/FREQUENCY"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//PropertyType/JITTER"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//PropertyType/MINDURATION"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//PropertyType/MAXDURATION"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//PropertyType/MEMORY"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="mm.ecore#//ContractType">
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//ContractType/ASSUMPTION"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//ContractType/GUARANTEE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="mm.ecore#//DirectionType">
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//DirectionType/INTERNAL"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//DirectionType/EXTERNAL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="mm.ecore#//ProviderType">
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//ProviderType/NATIVE"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//ProviderType/LEGACY"/>
+      <genEnumLiterals ecoreEnumLiteral="mm.ecore#//ProviderType/NETWORK"/>
+    </genEnums>
+    <genClasses ecoreClass="mm.ecore#//Module">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Module/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mm.ecore#//Module/isPartOf"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mm.ecore#//Module/realizedBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Module/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mm.ecore#//Module/ports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mm.ecore#//Module/contract"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mm.ecore#//Module/module"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Module/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Module/rte"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Module/spec"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Module/ram"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Module/caps"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mm.ecore#//Module/moduleType"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference mm.ecore#//Module/EnviromentalProperties"/>
+    </genClasses>
+    <genClasses ecoreClass="mm.ecore#//Abstract">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mm.ecore#//Abstract/realizes"/>
+    </genClasses>
+    <genClasses ecoreClass="mm.ecore#//Component">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Component/singleton"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Component/binary"/>
+    </genClasses>
+    <genClasses ecoreClass="mm.ecore#//Compound">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mm.ecore#//Compound/consistsOf"/>
+    </genClasses>
+    <genClasses ecoreClass="mm.ecore#//Contract">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Contract/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mm.ecore#//Contract/module"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Contract/ViewPoint"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mm.ecore#//Contract/assumption"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mm.ecore#//Contract/guarantee"/>
+    </genClasses>
+    <genClasses ecoreClass="mm.ecore#//Ports">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Ports/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Ports/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mm.ecore#//Ports/ports"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mm.ecore#//Ports/portseOpposite"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mm.ecore#//Ports/module"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mm.ecore#//Ports/insidePorts"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mm.ecore#//Ports/insidePortseOpposite"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Ports/service"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Ports/OuterDirection"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Ports/maxClients"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Ports/filter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Ports/label"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Ports/function"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Ports/providerType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Ports/isDerived"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Ports/event"/>
+    </genClasses>
+    <genClasses ecoreClass="mm.ecore#//ContractProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//ContractProperty/propertyTipe"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//ContractProperty/property"/>
+    </genClasses>
+    <genClasses ecoreClass="mm.ecore#//Guarantee">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mm.ecore#//Guarantee/contract"/>
+    </genClasses>
+    <genClasses ecoreClass="mm.ecore#//Assumption">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference mm.ecore#//Assumption/contract"/>
+    </genClasses>
+    <genClasses ecoreClass="mm.ecore#//System">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//System/name"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference mm.ecore#//System/consistsOf"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="mm.ecore#//ModuleType"/>
+    <genClasses ecoreClass="mm.ecore#//Proxy">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Proxy/carrier"/>
+    </genClasses>
+    <genClasses ecoreClass="mm.ecore#//Filter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Filter/add"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Filter/remove"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Filter/reset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Filter/alias"/>
+    </genClasses>
+    <genClasses ecoreClass="mm.ecore#//Mux">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Mux/service"/>
+    </genClasses>
+    <genClasses ecoreClass="mm.ecore#//Protocol">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Protocol/from"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Protocol/to"/>
+    </genClasses>
+    <genClasses ecoreClass="mm.ecore#//Function">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Function/function"/>
+    </genClasses>
+    <genClasses ecoreClass="mm.ecore#//Property">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Property/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Property/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mm.ecore#//Property/type"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

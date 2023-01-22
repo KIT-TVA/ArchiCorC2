@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: edu.kit.archicorc2.edl
+Bundle-ManifestVersion: 2
+Bundle-Name: edu.kit.archicorc2.edl
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: edu.kit.archicorc2.edl; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: edu.kit.archicorc2.edl.generator,
+ edu.kit.archicorc2.edl.serializer,
+ edu.kit.archicorc2.edl.parser.antlr,
+ edu.kit.archicorc2.edl.events.impl,
+ edu.kit.archicorc2.edl.validation,
+ edu.kit.archicorc2.edl,
+ edu.kit.archicorc2.edl.events,
+ edu.kit.archicorc2.edl.parser.antlr.internal,
+ edu.kit.archicorc2.edl.events.util,
+ edu.kit.archicorc2.edl.services,
+ edu.kit.archicorc2.edl.scoping
+Import-Package: org.apache.log4j,
+ org.eclipse.core.resources

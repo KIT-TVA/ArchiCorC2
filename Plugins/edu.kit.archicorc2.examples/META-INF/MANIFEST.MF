@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Examples
+Bundle-SymbolicName: edu.kit.archicorc2.examples;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: edu.kit.archicorc2.examples.ExamplePlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ edu.kit.archicorc2.ui;bundle-version="1.0.0",
+ org.eclipse.ui.workbench,
+ org.eclipse.ui.ide
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: edu.kit.archicorc2.examples
+Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.core.resources

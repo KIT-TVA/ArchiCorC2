@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypes">
+      <diagramType
+            name="ContractModelling Diagram Type"
+            type="ContractModelling"
+            description="hoo"
+            id="ContractModelling.ContractModellingDiagramType">
+      </diagramType>
+   </extension>
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypeProviders">
+      <diagramTypeProvider
+            name="ContractModelling Diagram Type Provider"
+            description="ddd"
+            class="edu.kit.archicorc2.core.diagram.ContractModellingDiagramTypeProvider"
+            id="ContractModelling.ContractModellingDiagramTypeProvider">
+         <diagramType
+               id="ContractModelling.ContractModellingDiagramType">
+         </diagramType>
+         <imageProvider
+               id="edu.kit.archicorc2.core.imageProvider">
+         </imageProvider>
+      </diagramTypeProvider>
+   </extension>
+   <extension point="org.eclipse.ui.menus">
+	  <menuContribution  allPopups="false" locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               id="edu.kit.archicorc2.io.CCCMenu"
+               label="ArchiCorC2"
+               icon="icons/cide2_16.png">
+            <command
+                  commandId="edu.kit.archicorc2.io.exporter_command"
+                  label="Export to CCC config. (.xml)"
+                  style="push">
+            </command>
+            <command
+                  commandId="edu.kit.archicorc2.io.importer_command"
+                  label="Import CCC config. (.xml)"
+                  style="push">
+            </command>
+            <command
+                  commandId="edu.kit.archicorc2.deploy"
+                  label="Deploy to CCC context"
+                  style="push">
+            </command>
+         </menu>
+	  </menuContribution>
+   <menuContribution
+         allPopups="false"
+         locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+      <toolbar
+            id="edu.kit.archicorc2.core.archicorctoolbar">
+         <command
+               commandId="edu.kit.archicorc2.core.deploybtn"
+               icon="icons/Icon-Deployment-Teal@16.png"
+               label="Deploy"
+               style="push">
+         </command>
+      </toolbar>
+   </menuContribution>
+	</extension>
+ <extension
+       point="org.eclipse.ui.commands">
+    <command
+          defaultHandler="edu.kit.archicorc2.core.io.handler.ExportHandler"
+          id="edu.kit.archicorc2.io.exporter_command"
+          name="ExportToXML">
+    </command>
+    <command
+          defaultHandler="edu.kit.archicorc2.core.io.handler.ImportHandler"
+          id="edu.kit.archicorc2.io.importer_command"
+          name="ImportXML">
+    </command>
+    <command
+          defaultHandler="edu.kit.archicorc2.core.io.handler.DeployHandler"
+          id="edu.kit.archicorc2.deploy"
+          name="Deploy">
+    </command>
+    <command
+          defaultHandler="edu.kit.archicorc2.core.io.handler.DeployHandler2"
+          id="edu.kit.archicorc2.core.deploybtn"
+          name="Deploy2">
+    </command>
+ </extension>
+   <extension
+         point="org.eclipse.graphiti.ui.imageProviders">
+      <imageProvider
+            class="edu.kit.archicorc2.core.diagram.ContractModellingImageProvider"
+            id="edu.kit.archicorc2.core.imageProvider">
+      </imageProvider>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="edu.kit.archicorc2.core.diagram.ContractModellingDiagramEditor"
+            default="true"
+            extensions="cide"
+            icon="icons/cide2_16.png"
+            id="edu.kit.archicorc2.diagram.editor"
+            matchingStrategy="org.eclipse.graphiti.ui.editor.DiagramEditorMatchingStrategy"
+            name="ArchiCorC2 Editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.decorators">
+      <decorator
+            adaptable="true"
+            class="edu.kit.archicorc2.core.decorators.SynchronizeDecorator"
+            id="edu.kit.archicorc2.core.decorators.SynchronizeDecorator"
+            label="Read-only Decorator"
+            lightweight="true"
+            state="true">
+         <enablement>
+            <and>
+               <objectClass
+                     name="org.eclipse.core.resources.IResource">
+               </objectClass>
+               <or>
+                  <objectClass
+                        name="org.eclipse.core.resources.IFolder">
+                  </objectClass>
+                  <objectClass
+                        name="org.eclipse.core.resources.IFile">
+                  </objectClass>
+               </or>
+            </and>
+         </enablement>
+      </decorator>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+         	<startup class="edu.kit.archicorc2.core.startup.Starter"/>
+   </extension>
+
+</plugin>

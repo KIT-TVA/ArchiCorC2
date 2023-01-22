@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="edu.kit.archicorc2.examples"
+            name="ArchiCorC2"
+            parentCategory="org.eclipse.ui.Examples">
+      </category>
+      <wizard
+            category="org.eclipse.ui.Examples/edu.kit.archicorc2.examples"
+            class="edu.kit.archicorc2.examples.wizards.ExampleNewWizard"
+            id="edu.kit.archicorc2.examples.SampleNewWizard"
+            name="ArchiCorC2 Examples">
+      </wizard>
+   </extension>
+
+</plugin>

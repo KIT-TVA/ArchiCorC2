@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: edu.kit.archicorc2.idl.ide
+Bundle-ManifestVersion: 2
+Bundle-Name: edu.kit.archicorc2.idl.ide
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: edu.kit.archicorc2.idl.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: edu.kit.archicorc2.idl,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: edu.kit.archicorc2.idl.ide.contentassist.antlr.internal,
+ edu.kit.archicorc2.idl.ide.contentassist.antlr
+

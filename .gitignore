@@ -25,3 +25,6 @@ hs_err_pid*
 # Hide CorC & KeY
 corc/
 key/
+*/src-gen/
+*/xtend-gen/
+*/bin/

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Grammar
+Bundle-SymbolicName: edu.kit.archicorc2.grammar
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: edu.kit.archicorc2.grammar
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: edu.kit.archicorc2.grammar.verification
+Bundle-ClassPath: .,
+ libs/antlr-4.7.1-complete.jar

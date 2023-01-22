@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="edu.kit.archicorc.ui.wizards"
+            name="ArchiCorC2">
+      </category>
+      <wizard
+            category="edu.kit.archicorc.ui.wizards"
+            class="edu.kit.archicorc2.ui.wizards.CCCProjectNewWizard"
+            icon="icons/cide2_16.png"
+            id="edu.kit.archicorc.ui.wizards.new.custom"
+            name="ArchiCorC2 Project">
+      </wizard>
+      <wizard
+            category="edu.kit.archicorc.ui.wizards"
+            class="edu.kit.archicorc2.ui.wizards.CompoundWizard"
+            icon="icons/compound_64.png"
+            id="contractmodelling.wizards.CompoundWizard"
+            name="Compound Component">
+      </wizard>
+      <wizard
+            category="edu.kit.archicorc.ui.wizards"
+            class="edu.kit.archicorc2.ui.wizards.ComponentWizard"
+            icon="icons/atomic_component_64.png"
+            id="contractmodelling.wizards.ComponentWizard"
+            name="Atomic Component">
+      </wizard>
+      <wizard
+            category="edu.kit.archicorc.ui.wizards"
+            class="edu.kit.archicorc2.ui.wizards.AbstractWizard"
+            icon="icons/abstract_component_64.png"
+            id="contractmodelling.wizards.AbstractWizard"
+            name="Abstract Component">
+      </wizard>
+      <wizard
+            category="edu.kit.archicorc.ui.wizards"
+            class="edu.kit.archicorc2.ui.wizards.SystemWizard"
+            icon="icons/system_64.png"
+            id="contractmodelling.wizards.SystemWizard"
+            name="System">
+      </wizard>
+   </extension>
+   
+	
+ <extension
+       point="org.eclipse.ui.views">
+    <category
+          id="archicorc.views.category"
+          name="ArchiCorC2">
+    </category>
+    <view
+          category="archicorc.views.category"
+          class="edu.kit.archicorc2.ui.views.ModulePropertiesView"
+          id="archicorc.views.moduleproperties"
+          name="ArchiCorC2 Properties"
+          restorable="true">
+    </view>
+    <view
+          category="archicorc.views.category"
+          class="edu.kit.archicorc2.ui.views.verification.VerificationView"
+          id="archicorc.views.verification"
+          name="Verification Results">
+    </view>
+    <view
+          category="archicorc.views.category"
+          class="edu.kit.archicorc2.ui.views.enviromentalView.EnviromentalView"
+          id="archicorc.views.envprops"
+          name="Enviromental Properties"
+          restorable="true">
+    </view>
+ </extension>
+</plugin>
