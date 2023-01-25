@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<exampleWizard>
+	<contentProvider name="General">
+		<path>Classic DbC</path>
+	</contentProvider>
+	<description>
+		Example is only partially implemented for the BankAccount example. Needs to be fixed.
+	</description>
+</exampleWizard>

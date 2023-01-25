@@ -1,0 +1,124 @@
+package services
+
+interface Account {
+	version {
+		major 0
+		minor 1		
+	}
+	method update {
+	 	contract {
+			requires: "true";
+			ensures: "res => (balance == \old(x) + x) && !res => balance == \old(balance)";
+	 	}
+	 	in {
+			UInt32 x
+		}
+		out {
+			UInt32 res
+		}
+	}
+	method undoUpdate {
+	 	contract {
+			requires: "true";
+			ensures: "res => (balance == \old(x) - x) && !res => balance == \old(balance)";
+	 	}
+	 	in {
+			UInt32 x
+		}
+		out {
+			UInt32 res
+		}
+	}
+}
+
+interface DailyAccount {
+	version {
+		major 0
+		minor 1		
+	}
+	method update {
+	 	contract {
+			requires: "true";
+			ensures: "???";
+	 	}
+	 	in {
+			UInt32 x
+		}
+		out {
+			UInt32 res
+		}
+	}
+	method undoUpdate {
+	 	contract {
+			requires: "true";
+			ensures: "???";
+	 	}
+	 	in {
+			UInt32 x
+		}
+		out {
+			UInt32 res
+		}
+	}
+}
+
+interface Limit {
+	version {
+		major 0
+		minor 1		
+	}
+	method getLimit {
+	 	contract {
+			requires: "true";
+			ensures: "???";
+	 	}
+	 	in {
+		}
+		out {
+			UInt32 res
+		}
+	}
+	method nextDay {
+	 	contract {
+			requires: "true";
+			ensures: "???";
+	 	}
+	 	in {
+		}
+		out {
+		}
+	}
+	method nextYear {
+	 	contract {
+			requires: "true";
+			ensures: "???";
+	 	}
+	 	in {
+		}
+		out {
+		}
+	}
+}
+
+interface Transfer {
+	version {
+		major 0
+		minor 1		
+	}
+	struct Account {}
+	
+	method transfer {
+	 	contract {
+			requires: "true";
+			ensures: "???";
+	 	}
+	 	in {
+			Account a 
+			Account b 
+			UInt32 x
+		}
+		out {
+			Boolean res
+		}
+	}
+}

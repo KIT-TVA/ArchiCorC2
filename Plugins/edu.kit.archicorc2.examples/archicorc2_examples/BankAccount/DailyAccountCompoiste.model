@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Verification:Compound xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Verification="http://www.example.org/contractVerificationMM" name="DailyAccountCompoiste">
+  <ports name="DailyAccountCompositeP" type="SERVICE" insidePortseOpposite="//@consistsOf.1/@ports.0" service="DailyAccount" OuterDirection="EXTERNAL"/>
+  <moduleType xsi:type="Verification:Function"/>
+  <consistsOf xsi:type="Verification:Component" name="Account">
+    <ports name="AccountP" type="SERVICE" ports="//@consistsOf.1/@ports.1" service="Account" OuterDirection="EXTERNAL"/>
+    <module href="src/repository/Account.model#/"/>
+    <moduleType xsi:type="Verification:Function"/>
+  </consistsOf>
+  <consistsOf xsi:type="Verification:Component" name="DailyAccount">
+    <ports name="DailyAccountP" type="SERVICE" insidePorts="//@ports.0" service="DailyAccount" OuterDirection="EXTERNAL"/>
+    <ports name="DailyAccountAccountR" type="SERVICE" portseOpposite="//@consistsOf.0/@ports.0" service="Account"/>
+    <ports name="DailyAccountLimitR" type="SERVICE" portseOpposite="//@consistsOf.2/@ports.0" service="Limit"/>
+    <module href="src/repository/DailyAccount.model#/"/>
+    <moduleType xsi:type="Verification:Function"/>
+  </consistsOf>
+  <consistsOf xsi:type="Verification:Component" name="DailyLimit">
+    <ports name="LimitP" type="SERVICE" ports="//@consistsOf.1/@ports.2" service="Limit" OuterDirection="EXTERNAL"/>
+    <module href="src/repository/DailyLimit.model#/"/>
+    <moduleType xsi:type="Verification:Function"/>
+  </consistsOf>
+</Verification:Compound>

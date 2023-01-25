@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Verification:Compound xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Verification="http://www.example.org/contractVerificationMM" name="Application">
+  <ports name="ApplicationP" type="SERVICE" insidePortseOpposite="//@consistsOf.1/@ports.0" service="Transfer" OuterDirection="EXTERNAL"/>
+  <moduleType xsi:type="Verification:Function"/>
+  <consistsOf xsi:type="Verification:Compound" name="DailyAccountCompoiste">
+    <ports name="DailyAccountCompositeP" type="SERVICE" ports="//@consistsOf.1/@ports.1" service="DailyAccount" OuterDirection="EXTERNAL"/>
+    <module href="platform:/resource/BankAccount/DailyAccountCompoiste.model#/"/>
+    <moduleType xsi:type="Verification:Function"/>
+  </consistsOf>
+  <consistsOf xsi:type="Verification:Component" name="Transaction">
+    <ports name="TransactionP" type="SERVICE" insidePorts="//@ports.0" service="Transfer" OuterDirection="EXTERNAL"/>
+    <ports name="TransactionR" type="SERVICE" portseOpposite="//@consistsOf.0/@ports.0" service="Account"/>
+    <module href="platform:/resource/BankAccount/src/repository/Transaction.model#/"/>
+    <moduleType xsi:type="Verification:Function"/>
+  </consistsOf>
+</Verification:Compound>
