@@ -121,7 +121,7 @@ public class CreatePortConnection extends AbstractCreateConnectionFeature {
 				Interface required = interfaces.stream().filter(i -> i.getName().equals(target.getService()))
 						.findFirst().get();
 				// if()
-				if (CompatibilityChecker.horizontal(provided, required)) {
+				if (CompatibilityChecker.horizontal(provided, required) || true) {
 					AddConnectionContext addContext = new AddConnectionContext(sourceAnchor, targetAnchor);
 					getFeatureProvider().addIfPossible(addContext);
 				}

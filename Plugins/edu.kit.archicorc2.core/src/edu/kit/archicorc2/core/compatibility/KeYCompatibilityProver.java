@@ -3,6 +3,7 @@ package edu.kit.archicorc2.core.compatibility;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -46,9 +47,29 @@ public class KeYCompatibilityProver {
 
 	// status: 0 - proven, 1 - interactively proven, 2 - Timeout, 3 - OpenGoals, 4 -
 	// not proven (doesn't exists in KeY), 5 - unknown
-	public static int[] proveWithKeYByText(String name, String[] parameters, String content) {
-		final long timeStart = System.currentTimeMillis();
-		long timeEnd = System.currentTimeMillis();
+
+	public static class ProofResult {
+		public enum Status {
+			PROVEN, INTERACTIVE, TIMEOUT, OPEN_GOALS, NOT_PROVEN, UNKNOWN
+		}
+
+		public String name;
+		public Status status;
+		public int steps;
+		public long time;
+
+		public ProofResult(String name, Status status, int steps, long l) {
+			this.name = name;
+			this.status = status;
+			this.steps = steps;
+			this.time = l;
+		}
+	}
+
+	public static List<ProofResult> proveWithKeYByText(String name, String[] parameters, String content) {
+//		final long timeStart = System.currentTimeMillis();
+//		long timeEnd = System.currentTimeMillis();
+//		List<ProofResult> proofresults = new ArrayList<ProofResult>();
 
 		final String PREF = "DummyFile";
 		final String SUFF = ".java";
@@ -61,56 +82,67 @@ public class KeYCompatibilityProver {
 			writer.write(content);
 
 			writer.close();
+
+			System.out.println("Java file created: " + tmpfile.getAbsolutePath());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
-		Proof proof = createKeYProofInstanceByText(name, parameters, tmpfile);
-		// results[0] = status, results[1] = steps, results[2] = time
-		int[] results = { 5, 0, 0 };
-		if (proof != null) {
-			boolean closed = proof.openGoals().isEmpty();
-			if (!closed) {
-				int steps = proof.countNodes();
-				if (steps >= maxSteps) {
-					results[0] = 2;
-					results[1] = steps;
-					timeEnd = System.currentTimeMillis();
-				} else {
-					MainWindow.getInstance().loadProblem(tmpfile);
-					MainWindow.getInstance().setVisible(true);
-					while (MainWindow.getInstance().isShowing()) {
-						try {
-							Thread.sleep(1000);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-					if (proof.openGoals().isEmpty()) {
-						results[0] = 1;
-						results[1] = steps;
-						timeEnd = System.currentTimeMillis();
-					} else {
-						results[0] = 3;
-						results[1] = steps;
-						timeEnd = System.currentTimeMillis();
-					}
-
-				}
-
-			} else {
-				results[0] = 0;
-				int steps = proof.countNodes();
-				results[1] = steps;
-				timeEnd = System.currentTimeMillis();
-			}
-		}
-
-		final long timeLong = timeEnd - timeStart;
-		int time = (int) timeLong;
-		results[2] = time;
-		return results;
+		//List<ProofResult> proofs = createKeYProofInstanceByText(name, parameters, tmpfile);
+		return createKeYProofInstanceByText(name, parameters, tmpfile);
+//		for (ProofResult pres : proofs) {
+//
+//			// results[0] = status, results[1] = steps, results[2] = time
+//			int[] results = { 5, 0, 0 };
+//			// ProofResult pres = new ProofResult(proof.name().toString(),
+//			// ProofResult.Status.UNKNOWN, 0, 0);
+//			if (proof != null) {
+//				boolean closed = proof.openGoals().isEmpty();
+//				if (!closed) {
+//					int steps = proof.countNodes();
+//					if (steps >= maxSteps) {
+//						pres.status = ProofResult.Status.TIMEOUT;
+//						pres.steps = steps;
+//						timeEnd = System.currentTimeMillis();
+//					} else {
+//						MainWindow.getInstance().loadProblem(tmpfile);
+//						MainWindow.getInstance().setVisible(true);
+//						while (MainWindow.getInstance().isShowing()) {
+//							try {
+//								Thread.sleep(1000);
+//							} catch (InterruptedException e) {
+//								e.printStackTrace();
+//							}
+//						}
+//						if (proof.openGoals().isEmpty()) {
+//							pres.status = ProofResult.Status.INTERACTIVE;
+//							pres.steps = steps;
+//							timeEnd = System.currentTimeMillis();
+//						} else {
+//							pres.status = ProofResult.Status.OPEN_GOALS;
+//							pres.steps = steps;
+//							timeEnd = System.currentTimeMillis();
+//						}
+//
+//					}
+//
+//				} else {
+//					pres.status = ProofResult.Status.PROVEN;
+//					int steps = proof.countNodes();
+//					pres.steps = steps;
+//					timeEnd = System.currentTimeMillis();
+//				}
+//
+//			}
+//
+//			final long timeLong = timeEnd - timeStart;
+//			int time = (int) timeLong;
+//			pres.time = time;
+//
+//			proofresults.add(pres);
+//		}
+//		return proofresults;
 	}
 
 	private static IProject getProject(URI uri) {
@@ -128,7 +160,7 @@ public class KeYCompatibilityProver {
 		return thisProject;
 	}
 
-	private static Proof createKeYProofInstanceByText(String name, String[] parameters, File tmpfile) {
+	private static List<ProofResult> createKeYProofInstanceByText(String name, String[] parameters, File tmpfile) {
 		Proof proof = null;
 		List<File> classPaths = null; // Optionally: Additional specifications
 										// for API classes
@@ -136,6 +168,8 @@ public class KeYCompatibilityProver {
 									// specifications for Java API
 		List<File> includes = null; // Optionally: Additional includes to
 									// consider
+
+		List<ProofResult> proofresultss = new ArrayList<ProofResult>();
 
 		// Ensure that Taclets are parsed
 		if (!ProofSettings.isChoiceSettingInitialised()) {
@@ -164,13 +198,13 @@ public class KeYCompatibilityProver {
 
 			try {
 				KeYJavaType type = env.getJavaInfo().getKeYJavaType("dummy.Dummy");
-				//Set<KeYJavaType> allTypes = env.getJavaInfo().getAllKeYJavaTypes();
+				// Set<KeYJavaType> allTypes = env.getJavaInfo().getAllKeYJavaTypes();
 				final List<Contract> proofContracts = getCorrectContract(name, parameters,
 						env.getSpecificationRepository(), type);
 				for (Contract contract : proofContracts) {
 					// currentResults.add(getResult(env, contract, so));
 
-					proof = generateProof(env, contract);
+					proofresultss.add(generateProofResult(env, contract, tmpfile));
 
 				}
 			} catch (ProofInputException e) {
@@ -243,11 +277,15 @@ public class KeYCompatibilityProver {
 			e.printStackTrace();
 		}
 
-		return proof;
+		return proofresultss;
 
 	}
 
-	public static Proof generateProof(KeYEnvironment<?> env, Contract c) throws ProofInputException {
+	// TODO remove proof instance -> create results...
+	public static ProofResult generateProofResult(KeYEnvironment<?> env, Contract c, File tmpfile)
+			throws ProofInputException {
+		final long timeStart = System.currentTimeMillis();
+		long timeEnd = System.currentTimeMillis();
 		Proof proof = null;
 		try {
 			proof = env.createProof(c.createProofObl(env.getInitConfig(), c));
@@ -269,10 +307,96 @@ public class KeYCompatibilityProver {
 			// Start auto mode
 
 			env.getUi().getProofControl().startAndWaitForAutoMode(proof);
-			boolean closed = proof.openGoals().isEmpty();
-			System.out.println("Contract '" + c.getDisplayName() + "' of " + c.getTarget() + " is "
-					+ (closed ? "verified" : "still open") + ".");
-			return proof;
+			ProofResult pres = new ProofResult(proof.name().toString(), ProofResult.Status.UNKNOWN, 0, 0);
+			if (proof != null) {
+				boolean closed = proof.openGoals().isEmpty();
+				System.out.println("Contract '" + c.getDisplayName() + "' of " + c.getTarget() + " is "
+						+ (closed ? "verified" : "still open") + ".");
+
+				if (!closed) {
+					int steps = proof.countNodes();
+					if (steps >= maxSteps) {
+						pres.status = ProofResult.Status.TIMEOUT;
+						pres.steps = steps;
+						timeEnd = System.currentTimeMillis();
+					} else {
+						final String PREF = "DummyPartialProof";
+						final String SUFF = ".key";
+						File tmpfile2 = null;
+						try {
+							tmpfile2 = File.createTempFile(PREF, SUFF);
+
+							proof.saveToFile(tmpfile2);
+
+							System.out.println("Saved partial proof for interactive session: " + tmpfile2.getAbsolutePath());
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						// MainWindow.getInstance().loadProblem(tmpfile2); //--> partial proof
+						MainWindow.getInstance().loadProblem(tmpfile); //--> new proof
+						MainWindow.getInstance().setVisible(true);
+						while (MainWindow.getInstance().isShowing()) {
+							try {
+								Thread.sleep(1000);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+						proof = MainWindow.getInstance().getMediator().getSelectedProof();
+						//proof.setProofFile(tmpfile2);
+
+						if (proof.openGoals().isEmpty()) {
+							pres.status = ProofResult.Status.INTERACTIVE;
+							pres.steps = steps;
+							timeEnd = System.currentTimeMillis();
+						} else {
+							pres.status = ProofResult.Status.OPEN_GOALS;
+							pres.steps = steps;
+							timeEnd = System.currentTimeMillis();
+						}
+
+					}
+
+				} else {
+					pres.status = ProofResult.Status.PROVEN;
+					int steps = proof.countNodes();
+					pres.steps = steps;
+					timeEnd = System.currentTimeMillis();
+				}
+
+			}
+
+			final long timeLong = timeEnd - timeStart;
+			int time = (int) timeLong;
+			pres.time = time;
+
+			//proofresults.add(pres);
+
+			if (pres.status != ProofResult.Status.PROVEN) {
+				final String PREF = "DummyProof";
+				final String SUFF = ".key";
+				File tmpfile2 = null;
+				try {
+					tmpfile2 = File.createTempFile(PREF, SUFF);
+
+					proof.saveToFile(tmpfile2);
+
+					System.out.println("Saved unclosed proof: " + tmpfile2.getAbsolutePath());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+//			// Show proof result
+////		try {
+////			proof.saveToFile(tmpfile);
+////		} catch (IOException e) {
+////			e.printStackTrace();
+////		}
+
+			return pres;
 		} finally {
 			if (proof != null) {
 				proof.dispose(); // Ensure always that all instances of Proof
